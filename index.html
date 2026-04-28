@@ -47,10 +47,55 @@
             </div>
 
             <button class="btn-custom-trigger" onclick="openCustomModal()">Custom Timer</button>
+            <button class="btn-box-trigger" onclick="openBox()">My Egg Box</button>
         </main>
 
         <audio id="alarm-sound" src="assets/audio/End.mp3"></audio>
     </div>
+
+    <section id="box-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="box-title">
+        <div class="modal-content box-content">
+            <h2 id="box-title">MY EGG BOX</h2>
+            <div class="sticker-grid">
+                <div class="sticker-item" id="s-soft" title="Boil a soft egg">
+                    <img src="assets/images/sticker/soft_sticker.png" alt="Soft egg sticker">
+                    <p>Softie</p>
+                </div>
+                <div class="sticker-item" id="s-jammy" title="Boil a jammy egg">
+                    <img src="assets/images/sticker/jammy_sticker.png" alt="Jammy egg sticker">
+                    <p>Jammy</p>
+                </div>
+                <div class="sticker-item" id="s-hard" title="Boil a hard egg">
+                    <img src="assets/images/sticker/hard_sticker.png" alt="Hard egg sticker">
+                    <p>Hardcore</p>
+                </div>
+                <div class="sticker-item" id="s-abs" title="Boil for 12-15 mins">
+                    <img src="assets/images/sticker/abs_egg.png" alt="Abs egg sticker">
+                    <p>Gym Bro</p>
+                </div>
+                <div class="sticker-item" id="s-pot" title="Use custom timer">
+                    <img src="assets/images/sticker/boiling_pot.png" alt="Boiling pot sticker">
+                    <p>Chef</p>
+                </div>
+                <div class="sticker-item" id="s-chili" title="Find Kevin's secret">
+                    <img src="assets/images/sticker/chili_egg.png" alt="Chili egg sticker">
+                    <p>Malone</p>
+                </div>
+                <div class="sticker-item" id="s-cat" title="Solve cat math">
+                    <img src="assets/images/sticker/cat_sticker.png" alt="Cat sticker">
+                    <p>Not A Cat</p>
+                </div>
+                <div class="sticker-item" id="s-batch" title="Collect all stickers">
+                    <img src="assets/images/sticker/batch_eggs.png" alt="Batch eggs sticker">
+                    <p>MASTER</p>
+                </div>
+            </div>
+            <div class="box-controls">
+                <button class="modal-btn" onclick="closeBox()">Close Box</button>
+                <button class="modal-btn btn-reset" onclick="resetStickers()">Reset All</button>
+            </div>
+        </div>
+    </section>
 
     <section id="custom-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-prompt">
         <div class="modal-content">
@@ -92,6 +137,17 @@
                 <div id="warning-buttons"></div>
             </div>
             <div id="modal-subcontent" class="hidden"></div>
+        </div>
+    </section>
+
+    <section id="sticker-alert" class="sticker-alert hidden">
+        <div class="alert-content">
+            <img src="assets/images/trophy.png" alt="Trophy" class="alert-trophy">
+            <div class="alert-text">
+                <h3>NEW STICKER!</h3>
+                <p id="unlocked-name"></p>
+            </div>
+            <img id="unlocked-img" src="" alt="Sticker" class="alert-sticker">
         </div>
     </section>
 

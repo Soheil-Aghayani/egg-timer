@@ -13,6 +13,9 @@ const header = document.querySelector('header');
 const colorPicker = document.querySelector('.color-picker');
 let secretClicks = 0;
 
+// Sticker Data
+let unlockedStickers = JSON.parse(localStorage.getItem('eggStickers')) || [];
+
 const kevinQuotes = [
     "The trick is to undercook the onions. Everybody is going to get to know each other in the pot.",
     "It's probably the thing I do best.",
@@ -24,14 +27,7 @@ const kevinQuotes = [
     "Me think, why waste time say lot word, when few word do trick?",
     "A mistake plus keleven gets you home by seven.",
     "I am enormously proud of what I did for that chili.",
-    "I'm a dynamic figure, often seen scaling walls and crushing ice.",
-    "I have been known to remodel my kitchen over the weekend.",
-    "I'm a private person. I don't want to be a public person.",
-    "I don't need to be your best friend. I already have a best friend. Myself.",
-    "I'm not a million miles away from a hot dog right now.",
-    "When me president, they see. They see.",
     "Oscar, you're the smartest person I know. Besides me.",
-    "I'm a bit of a wine connoisseur. I like the red one.",
     "Do you want to hear a joke? My life.",
     "I'm not slow. I'm just thorough.",
     "Chili. It's what's for dinner. And breakfast. And nap time."
@@ -39,25 +35,15 @@ const kevinQuotes = [
 
 const kevinWisdom = [
     "Never trust turtle. They too slow, they planning something.",
-    "Mini cupcakes? As in the mini version of regular cupcakes? Honestly, where does it end?",
     "Chili belongs in pot. Not on floor. Floor make chili sad.",
-    "I just want to lie on the beach and eat hot dogs. That's all I've ever wanted.",
+    "I just want to lie on the beach and eat hot dogs.",
     "A mistake plus keleven gets you home by seven. Math is easy.",
-    "Why waste time say lot word when few word do trick?",
-    "If you find office supplies, they yours now. Finders keepers.",
     "Cookies are just flat cakes. Think about it.",
-    "Don't undercook the onions. Wait, no, DO undercook the onions. For the pot.",
+    "Don't undercook the onions. Wait, no, DO undercook the onions.",
     "Everything is better with a nap. Even naps.",
-    "If someone give you gift, you take it. Even if it rocks.",
     "Bread is just a sponge for butter. Use it.",
-    "A dog is a man's best friend. A hot dog is a Kevin's best friend.",
     "Work is hard. Nap is easy. Choose easy.",
-    "Always carry a snack. You never know when hunger strike.",
-    "If you fall, stay down for a bit. It's like a surprise nap.",
-    "The world is big. My stomach is bigger.",
-    "If you can't find it, it's not lost. It's just hiding.",
-    "Sometimes I feel like a nut. Sometimes I don't.",
-    "Be careful with the chili. It's heavy. Like my heart."
+    "If you fall, stay down for a bit. It's like a surprise nap."
 ];
 
 const eggFacts = [
@@ -72,13 +58,8 @@ const eggFacts = [
     "Brown egg, white egg. Same inside.",
     "Chicken make one egg every day. Busy bird.",
     "Kevin like egg. Egg taste good.",
-    "Some egg green. Dr. Seuss say they taste good with ham.",
-    "Egg not have teeth. Don't worry, it not bite.",
     "If you drop egg, it break. Sad day. Big mess.",
-    "Chickens talk to eggs. Egg say nothing. Rude.",
     "Egg can breathe! Shell has tiny holes. Tiny tiny.",
-    "Kevin think breakfast came before egg. Logic.",
-    "Egg in space? Astronaut eat them. Floating egg!",
     "One time Kevin eat 20 egg. Then Kevin nap for week."
 ];
 
@@ -88,34 +69,12 @@ document.addEventListener('keydown', (e) => {
     if (modal && !modal.classList.contains('hidden')) {
         if (e.key === 'Escape') {
             const timerArea = document.getElementById('modal-timer-area');
-            // If timer is showing, use resetApp to restore main screen
-            if (timerArea && !timerArea.classList.contains('hidden')) {
-                resetApp();
-            } else {
-                closeModal(false);
-            }
+            if (timerArea && !timerArea.classList.contains('hidden')) resetApp();
+            else closeModal(false);
         }
         if (e.key === 'Enter') {
             const inputArea = document.getElementById('modal-input-area');
-            if (inputArea && !inputArea.classList.contains('hidden')) {
-                validateAndStart();
-            }
-        }
-        
-        // Focus Trap
-        if (e.key === 'Tab') {
-            const focusable = modal.querySelectorAll('button, input, [tabindex="0"]');
-            if (focusable.length === 0) return;
-            const first = focusable[0];
-            const last = focusable[focusable.length - 1];
-            
-            if (e.shiftKey && document.activeElement === first) {
-                last.focus();
-                e.preventDefault();
-            } else if (!e.shiftKey && document.activeElement === last) {
-                first.focus();
-                e.preventDefault();
-            }
+            if (inputArea && !inputArea.classList.contains('hidden')) validateAndStart();
         }
     }
 });
@@ -123,6 +82,7 @@ document.addEventListener('keydown', (e) => {
 function checkSecret() {
     secretClicks++;
     if (secretClicks >= 5) {
+        unlockSticker('chili');
         const sketchbook = document.querySelector('.sketchbook');
         const surprise = document.getElementById('kevin-surprise');
         const quoteElem = document.getElementById('kevin-quote');
@@ -201,7 +161,7 @@ function startTimer(seconds, label, imgPath) {
     if (timerTitle) timerTitle.innerText = label + "...";
     if (timerEggImg) {
         timerEggImg.src = imgPath || 'assets/images/soft.png';
-        timerEggImg.onclick = getWisdom; // Kevin egg click for wisdom
+        timerEggImg.onclick = getWisdom;
     }
     
     if (pauseBtn) {
@@ -297,6 +257,7 @@ function validateAndStart() {
 
     const customImg = document.getElementById('custom-egg-img');
     startTimer(mins * 60, "Custom Egg", customImg.src);
+    unlockSticker('pot');
 }
 
 function showWarningArea() {
@@ -360,6 +321,7 @@ function handleWarning(choice) {
 
 function checkCatMath(val) {
     if (val == "4") {
+        unlockSticker('cat');
         const subcontent = document.getElementById('modal-subcontent');
         subcontent.innerHTML += '<p style="color: green;">You not cat. OK.</p>';
         setTimeout(() => closeModal(true), 1000);
@@ -385,6 +347,13 @@ function displayTimeLeft(seconds) {
 
 function playAlarm() {
     timerDone = true;
+    const mins = Math.round(secondsRemaining / 60); // Not perfect but enough
+    // Logic for stickers based on currentLabel or time
+    if (currentLabel.includes("Soft")) unlockSticker('soft');
+    if (currentLabel.includes("Jammy")) unlockSticker('jammy');
+    if (currentLabel.includes("Hard")) unlockSticker('hard');
+    if (currentLabel.includes("Gym")) unlockSticker('abs');
+    
     const timerTitle = document.getElementById('timer-title');
     if (timerTitle) timerTitle.innerText = "CLICK EGG FOR WISDOM!";
     if (pauseBtn) pauseBtn.classList.add('hidden');
@@ -401,6 +370,84 @@ function resetApp() {
     if (colorPicker) colorPicker.classList.remove('hidden');
     header.classList.remove('hidden');
     document.getElementById('custom-modal').classList.add('hidden');
+    document.getElementById('box-modal').classList.add('hidden');
     if (pauseBtn) pauseBtn.classList.remove('hidden');
     document.title = "The Whimsical Egg Timer";
+}
+
+// Sticker Management
+function unlockSticker(id) {
+    if (!unlockedStickers.includes(id)) {
+        unlockedStickers.push(id);
+        localStorage.setItem('eggStickers', JSON.stringify(unlockedStickers));
+        showStickerAlert(id);
+        checkMaster();
+    }
+}
+
+function showStickerAlert(id) {
+    const alert = document.getElementById('sticker-alert');
+    const nameElem = document.getElementById('unlocked-name');
+    const imgElem = document.getElementById('unlocked-img');
+    
+    const names = {
+        'soft': 'Softie',
+        'jammy': 'Jammy',
+        'hard': 'Hardcore',
+        'abs': 'Gym Bro',
+        'pot': 'Chef',
+        'chili': 'Malone',
+        'cat': 'Not A Cat',
+        'batch': 'MASTER'
+    };
+
+    const imgs = {
+        'soft': 'assets/images/sticker/soft_sticker.png',
+        'jammy': 'assets/images/sticker/jammy_sticker.png',
+        'hard': 'assets/images/sticker/hard_sticker.png',
+        'abs': 'assets/images/sticker/abs_egg.png',
+        'pot': 'assets/images/sticker/boiling_pot.png',
+        'chili': 'assets/images/sticker/chili_egg.png',
+        'cat': 'assets/images/sticker/cat_sticker.png',
+        'batch': 'assets/images/sticker/batch_eggs.png'
+    };
+
+    nameElem.innerText = names[id] || 'New Friend!';
+    imgElem.src = imgs[id] || '';
+    
+    alert.classList.remove('hidden');
+    setTimeout(() => {
+        alert.classList.add('hidden');
+    }, 4000);
+}
+
+function checkMaster() {
+    const mainIds = ['soft', 'jammy', 'hard', 'abs', 'pot', 'chili', 'cat'];
+    const all = mainIds.every(id => unlockedStickers.includes(id));
+    if (all) unlockSticker('batch');
+}
+
+function openBox() {
+    const modal = document.getElementById('box-modal');
+    modal.classList.remove('hidden');
+    
+    unlockedStickers.forEach(id => {
+        const item = document.getElementById('s-' + id);
+        if (item) item.classList.add('unlocked');
+    });
+}
+
+function closeBox() {
+    document.getElementById('box-modal').classList.add('hidden');
+}
+
+function resetStickers() {
+    if (confirm("Reset all stickers? Kevin be sad...")) {
+        unlockedStickers = [];
+        localStorage.removeItem('eggStickers');
+        // Update UI
+        const items = document.querySelectorAll('.sticker-item');
+        items.forEach(item => item.classList.remove('unlocked'));
+        closeBox();
+    }
 }

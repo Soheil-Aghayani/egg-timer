@@ -1,0 +1,353 @@
+:root {
+    --ink-black: #1a1a1a;
+    --paper-white: #fefcf5;
+    --water-blue: rgba(74, 144, 226, 0.15);
+    --egg-yellow: rgba(255, 203, 5, 0.4);
+}
+
+/* Base Stylings & Paper Texture */
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: #dcdcdc; /* Desk surface */
+    /* Add a subtle watercolor paper texture image here if you have one */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23ccc' fill-opacity='0.1' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    font-family: 'Patrick Hand SC', cursive;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    padding: 10px; /* Thinner padding for mobile */
+}
+
+/* The Main Container (Sketchbook Page) */
+.sketchbook {
+    background: var(--paper-white);
+    width: 100%;
+    max-width: 480px;
+    min-height: 90vh;
+    padding: 20px;
+    /* AUTHENTIC BORDER: Wobbly and pressure-sensitive */
+    border: 3px solid var(--ink-black);
+    border-radius: 2% 98% 3% 97% / 97% 4% 96% 3%;
+    box-shadow: 15px 15px 0px rgba(0,0,0,0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: var(--ink-black);
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* Egg Selection Grid - Single Column for Mobile */
+#egg-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* The Egg Card (Cuter) */
+.egg-card {
+    border: 2px solid var(--ink-black);
+    /* Irregular Shape */
+    border-radius: 20px 300px 30px 150px/100px 30px 220px 20px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    grid-template-areas: 
+        "img title"
+        "img desc";
+    align-items: center;
+    gap: 5px 15px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+/* Add a random messy watercolor splash behind the card when hovered/active */
+.egg-card:active::after, .egg-card:hover::after {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: var(--egg-yellow);
+    filter: blur(20px);
+    border-radius: 50%;
+    z-index: -1;
+    left: -10%; top: -10%;
+    opacity: 0.5;
+}
+
+.egg-card:active {
+    transform: scale(0.97) rotate(-2deg);
+}
+
+/* The Illustration */
+.egg-card img {
+    grid-area: img;
+    width: 80px;
+    height: auto;
+    max-height: 90px;
+    object-fit: contain;
+}
+
+.egg-card h2 {
+    grid-area: title;
+    margin: 0;
+    font-size: 1.6rem;
+    color: var(--ink-black);
+}
+
+.egg-card p {
+    grid-area: desc;
+    margin: 0;
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Color Picker */
+.color-picker {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.color-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--ink-black);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-dot:hover {
+    transform: scale(1.2);
+}
+
+.color-white { background: var(--paper-white); }
+.color-blue { background: #e3f2fd; }
+.color-pink { background: #fce4ec; }
+.color-green { background: #e8f5e9; }
+
+/* Fact Box */
+.fact-box {
+    margin: 20px auto;
+    padding: 10px;
+    border-top: 1px dashed var(--ink-black);
+    border-bottom: 1px dashed var(--ink-black);
+    max-width: 80%;
+    font-style: italic;
+    color: #444;
+}
+
+/* Wisdom Box */
+.wisdom-box {
+    background: #fff;
+    border: 3px solid #ff9800;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px auto;
+    max-width: 80%;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+    animation: wobble 2s infinite;
+}
+
+.wisdom-box p {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #4e342e;
+    font-weight: bold;
+}
+
+/* Timer Section */
+#timer-display {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cooking-egg-img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Make the timer circle look like a water wash */
+.timer-circle {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto;
+    border: 3px solid var(--ink-black);
+    border-radius: 50% 48% 52% 49% / 49% 52% 48% 51%; /* Wobbly circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    color: var(--ink-black);
+    background-color: var(--water-blue);
+    /* Cute Animation when running */
+    animation: wobble 4s infinite ease-in-out;
+}
+
+.hidden { display: none; }
+
+/* Control Buttons */
+.btn-cancel, .btn-pause {
+    background: none;
+    border: 2px solid var(--ink-black);
+    font-family: inherit;
+    font-size: 1.4rem;
+    padding: 8px 18px;
+    border-radius: 50px 20px 50px 20px;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.btn-cancel:active {
+    background: #f00;
+    color: white;
+}
+
+.btn-pause {
+    background-color: var(--egg-yellow);
+}
+
+.btn-pause:active {
+    transform: scale(0.95);
+}
+
+/* Custom Input Card */
+.custom-input-card {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "input btn";
+    border-style: dashed;
+    justify-content: space-between;
+}
+
+input[type="number"] {
+    grid-area: input;
+    width: 100%;
+    max-width: 100px;
+    font-family: inherit;
+    font-size: 2rem;
+    border: none;
+    border-bottom: 2px solid var(--ink-black);
+    background: transparent;
+    text-align: center;
+    outline: none;
+    color: var(--ink-black);
+}
+
+.custom-input-card button {
+    grid-area: btn;
+    background: var(--egg-yellow);
+    border: 2px solid var(--ink-black);
+    font-family: inherit;
+    font-size: 1.3rem;
+    padding: 8px 15px;
+    border-radius: 5px 30px 5px 30px;
+    cursor: pointer;
+}
+
+/* Kevin Surprise & Chili Mode */
+#kevin-surprise {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #4e342e; /* Chili Brown */
+    color: #fff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#kevin-surprise img {
+    width: 90%;
+    border: 8px solid #ff9800; /* Pot Orange */
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+#kevin-surprise h2 {
+    font-size: 3rem;
+    margin: 10px 0;
+    color: #ff9800;
+    text-shadow: 2px 2px #000;
+}
+
+#kevin-surprise p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.btn-kevin {
+    background: #ff9800;
+    border: none;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.kevin-hidden {
+    display: none !important;
+}
+
+/* Screen Shake */
+.shake {
+    animation: shake-anim 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake-anim {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    z-index: 999;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(360deg);
+    }
+}
+
+/* Animations */
+@keyframes wobble {
+    0%, 100% { border-radius: 50% 48% 52% 49% / 49% 52% 48% 51%; transform: rotate(0deg); }
+    25% { border-radius: 52% 49% 49% 52% / 51% 48% 52% 49%; transform: rotate(1deg); }
+    50% { border-radius: 49% 52% 48% 51% / 48% 51% 50% 48%; transform: rotate(-1deg); }
+    75% { border-radius: 51% 48% 52% 49% / 52% 49% 49% 52%; transform: rotate(0.5deg); }
+}

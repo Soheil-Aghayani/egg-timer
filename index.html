@@ -11,67 +11,89 @@
 
     <div class="sketchbook">
         <header>
-            <div class="color-picker">
-                <div class="color-dot color-white" onclick="changeColor('#fefcf5')"></div>
-                <div class="color-dot color-blue" onclick="changeColor('#e3f2fd')"></div>
-                <div class="color-dot color-pink" onclick="changeColor('#fce4ec')"></div>
-                <div class="color-dot color-green" onclick="changeColor('#e8f5e9')"></div>
+            <div class="color-picker" role="group" aria-label="Change sketchbook color">
+                <div class="color-dot color-white" onclick="changeColor('#fefcf5')" role="button" aria-label="White paper"></div>
+                <div class="color-dot color-blue" onclick="changeColor('#e3f2fd')" role="button" aria-label="Blue paper"></div>
+                <div class="color-dot color-pink" onclick="changeColor('#fce4ec')" role="button" aria-label="Pink paper"></div>
+                <div class="color-dot color-green" onclick="changeColor('#e8f5e9')" role="button" aria-label="Green paper"></div>
             </div>
-            <h1 id="main-title" onclick="checkSecret()">Pick your perfect egg!</h1>
+            <h1 id="main-title" onclick="checkSecret()" tabindex="0" aria-label="Pick your perfect egg! Click 5 times for a surprise.">Pick your perfect egg!</h1>
         </header>
 
-        <div id="kevin-surprise" class="kevin-hidden">
-            <h2>KEVIN'S FAMOUS CHILI</h2>
-            <img src="assets/images/kevin.gif" alt="Kevin Spills Chili">
+        <div id="kevin-surprise" class="kevin-hidden" role="dialog" aria-labelledby="chili-title">
+            <h2 id="chili-title">KEVIN'S FAMOUS CHILI</h2>
+            <img src="assets/images/kevin.gif" alt="Kevin Malone spilling a giant pot of chili on the office floor">
             <p id="kevin-quote">The trick is to undercook the onions.</p>
             <button class="btn-kevin" onclick="hideSecret()">EGG IS BETTER</button>
         </div>
 
         <main id="egg-selection">
-            <div class="egg-card" onclick="startTimer(360, 'Sleeping Softly', 'assets/images/soft.png')">
-                <img src="assets/images/soft.png" alt="Sleepy Soft Egg">
+            <div class="egg-card" onclick="startTimer(360, 'Sleeping Softly', 'assets/images/soft.png')" role="button" tabindex="0">
+                <img src="assets/images/soft.png" alt="Illustration of a soft boiled egg">
                 <h2>Soft (6 min)</h2>
                 <p>A runny embrace.</p>
             </div>
             
-            <div class="egg-card" onclick="startTimer(420, 'Jammy Dance', 'assets/images/jammy.png')">
-                <img src="assets/images/jammy.png" alt="Happy Jammy Egg">
+            <div class="egg-card" onclick="startTimer(420, 'Jammy Dance', 'assets/images/jammy.png')" role="button" tabindex="0">
+                <img src="assets/images/jammy.png" alt="Illustration of a jammy egg">
                 <h2>Jammy (7 min)</h2>
                 <p>Sticky, gooey joy.</p>
             </div>
             
-            <div class="egg-card" onclick="startTimer(600, 'Properly Hard', 'assets/images/hard.png')">
-                <img src="assets/images/hard.png" alt="Proper Hard Egg">
+            <div class="egg-card" onclick="startTimer(600, 'Properly Hard', 'assets/images/hard.png')" role="button" tabindex="0">
+                <img src="assets/images/hard.png" alt="Illustration of a hard boiled egg">
                 <h2>Hard (10 min)</h2>
                 <p>Fully set & ready.</p>
             </div>
 
-            <div class="egg-card custom-input-card">
-                <input type="number" id="custom-minutes" placeholder="?" min="1" max="60">
-                <button onclick="startCustomTimer()">Custom Go!</button>
-            </div>
+            <button class="btn-custom-trigger" onclick="openCustomModal()">Custom Timer</button>
         </main>
-
-        <section id="timer-display" class="hidden">
-            <h2 id="egg-type-title">Boiling...</h2>
-            <img id="timer-egg-img" src="" alt="Cooking Egg" class="cooking-egg-img" onclick="getWisdom()">
-            <div id="wisdom-box" class="wisdom-box hidden">
-                <p id="kevin-wisdom-text"></p>
-            </div>
-            <div class="timer-circle">
-                <span id="countdown-text">00:00</span>
-            </div>
-            <div id="fact-box" class="fact-box">
-                <p id="egg-fact">Loading egg truth...</p>
-            </div>
-            <div class="timer-controls">
-                <button id="pause-btn" class="btn-pause" onclick="togglePause()">Pause</button>
-                <button class="btn-cancel" onclick="resetApp()">STOP!</button>
-            </div>
-        </section>
 
         <audio id="alarm-sound" src="assets/audio/End.mp3"></audio>
     </div>
+
+    <section id="custom-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-prompt">
+        <div class="modal-content">
+            <!-- Entry Area -->
+            <div id="modal-input-area">
+                <p id="modal-prompt">How many minutes for your egg?</p>
+                <div class="custom-input-container">
+                    <img id="custom-egg-img" src="assets/images/who_am_i.png" alt="Custom egg preview">
+                    <input type="number" id="custom-minutes" placeholder="?" min="1" oninput="updateCustomImage(this.value)" aria-label="Minutes to boil">
+                </div>
+                <div id="modal-buttons">
+                    <button class="modal-btn" onclick="validateAndStart()">Start Timer</button>
+                    <button class="modal-btn" onclick="closeModal(false)">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Timer Area -->
+            <div id="modal-timer-area" class="hidden">
+                <h2 id="timer-title">Boiling...</h2>
+                <img id="timer-egg-img" src="assets/images/soft.png" alt="Cooking egg" class="timer-art" tabindex="0" aria-label="Click for Kevin wisdom">
+                <div id="wisdom-box" class="wisdom-box hidden" aria-live="assertive">
+                    <p id="kevin-wisdom-text"></p>
+                </div>
+                <div class="timer-circle" aria-live="polite">
+                    <span id="countdown-text">00:00</span>
+                </div>
+                <div id="fact-box" class="fact-box" aria-live="polite">
+                    <p id="egg-fact">Loading egg truth...</p>
+                </div>
+                <div class="timer-controls">
+                    <button id="pause-btn" class="btn-pause" onclick="togglePause()">Pause</button>
+                    <button class="btn-cancel" onclick="resetApp()">STOP!</button>
+                </div>
+            </div>
+
+            <!-- Warning Area -->
+            <div id="modal-warning-area" class="hidden">
+                <p id="modal-text"></p>
+                <div id="warning-buttons"></div>
+            </div>
+            <div id="modal-subcontent" class="hidden"></div>
+        </div>
+    </section>
 
     <script src="js/script.js"></script>
 </body>

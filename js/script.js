@@ -63,6 +63,17 @@ const eggFacts = [
     "One time Kevin eat 20 egg. Then Kevin nap for week."
 ];
 
+const eggNames = [
+    "Egg-scar Malone", "Angela-egg", "Egg-ight Schrute", "Jim Egg-pert", "Pam Beegg-sly", 
+    "Michael Sc-egg", "Creed Egg-ton", "Egg-an Howard", "Egg-elly Kapoor", "To-egg Flenderson",
+    "Egg-ndy Bernard", "Ph-egg-is Vance", "Stan-egg Hudson", "Egg-ridith Palmer", "Darryl Ph-egg-bin",
+    "Kevin Jr.", "Ch-egg-i Malone", "Big Egg", "Ashton Koot-egg", "Scarn Egg",
+    "Shell-don", "Benedict", "Eggy", "Yolko Ono", "Egg-ward", "Gret-egg", "Shell-ey",
+    "Egg-son", "Yolk-ahontas", "Egg-atha Christie", "Egg-cules", "Moby Egg", "Egg-oist",
+    "Egg-terminator", "Egg-sterminator 2", "Egg-sterminator: Judgment Day", "Egg-celent One",
+    "Little Malone", "Pot Friend", "Yellow Heart", "Oval Buddy", "Roll Master"
+];
+
 // Keyboard Listeners
 document.addEventListener('keydown', (e) => {
     const modal = document.getElementById('custom-modal');
@@ -151,6 +162,7 @@ function startTimer(seconds, label, imgPath) {
     const wisdomBox = document.getElementById('wisdom-box');
     const timerTitle = document.getElementById('timer-title');
     const timerEggImg = document.getElementById('timer-egg-img');
+    const nameTag = document.getElementById('egg-name-tag');
 
     modal.classList.remove('hidden');
     timerArea.classList.remove('hidden');
@@ -164,6 +176,11 @@ function startTimer(seconds, label, imgPath) {
         timerEggImg.onclick = getWisdom;
     }
     
+    if (nameTag) {
+        const randomName = eggNames[Math.floor(Math.random() * eggNames.length)];
+        nameTag.innerText = "Name: " + randomName;
+    }
+
     if (pauseBtn) {
         pauseBtn.innerText = "Pause";
         pauseBtn.classList.remove('hidden');
@@ -241,12 +258,33 @@ function updateCustomImage(val) {
     else customImg.src = 'assets/images/who_am_i.png';
 }
 
+function showKevin69() {
+    document.getElementById('kevin-69-modal').classList.remove('hidden');
+}
+
+function closeKevin69() {
+    document.getElementById('kevin-69-modal').classList.add('hidden');
+    // Start 69 minute timer
+    startTimer(69 * 60, "Kevin's Special Egg", 'assets/images/69.png');
+    
+    const minsInput = document.getElementById('custom-minutes');
+    if (minsInput) {
+        minsInput.value = '';
+        updateCustomImage('');
+    }
+}
+
 function validateAndStart() {
     const minsInput = document.getElementById('custom-minutes');
     const mins = parseInt(minsInput.value);
 
     if (isNaN(mins) || mins <= 0) {
         alert("Please enter a valid number of minutes!");
+        return;
+    }
+
+    if (mins === 69) {
+        showKevin69();
         return;
     }
 
@@ -347,8 +385,7 @@ function displayTimeLeft(seconds) {
 
 function playAlarm() {
     timerDone = true;
-    const mins = Math.round(secondsRemaining / 60); // Not perfect but enough
-    // Logic for stickers based on currentLabel or time
+    const mins = Math.round(secondsRemaining / 60);
     if (currentLabel.includes("Soft")) unlockSticker('soft');
     if (currentLabel.includes("Jammy")) unlockSticker('jammy');
     if (currentLabel.includes("Hard")) unlockSticker('hard');
@@ -445,7 +482,6 @@ function resetStickers() {
     if (confirm("Reset all stickers? Kevin be sad...")) {
         unlockedStickers = [];
         localStorage.removeItem('eggStickers');
-        // Update UI
         const items = document.querySelectorAll('.sticker-item');
         items.forEach(item => item.classList.remove('unlocked'));
         closeBox();

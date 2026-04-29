@@ -22,26 +22,26 @@
 
         <div id="kevin-surprise" class="kevin-hidden" role="dialog" aria-labelledby="chili-title">
             <h2 id="chili-title">KEVIN'S FAMOUS CHILI</h2>
-            <img src="assets/images/kevin.gif" alt="Kevin Malone spilling a giant pot of chili on the office floor">
+            <img src="assets/images/kevin.webp" alt="Kevin Malone spilling a giant pot of chili on the office floor">
             <p id="kevin-quote">The trick is to undercook the onions.</p>
             <button class="btn-kevin" onclick="hideSecret()">EGG IS BETTER</button>
         </div>
 
         <main id="egg-selection">
-            <div class="egg-card" onclick="startTimer(360, 'Sleeping Softly', 'assets/images/soft.png')" role="button" tabindex="0">
-                <img src="assets/images/soft.png" alt="Illustration of a soft boiled egg">
+            <div class="egg-card" onclick="startTimer(360, 'Sleeping Softly', 'assets/images/soft.webp')" role="button" tabindex="0">
+                <img src="assets/images/soft.webp" alt="Illustration of a soft boiled egg">
                 <h2>Soft (6 min)</h2>
                 <p>A runny embrace.</p>
             </div>
             
-            <div class="egg-card" onclick="startTimer(420, 'Jammy Dance', 'assets/images/jammy.png')" role="button" tabindex="0">
-                <img src="assets/images/jammy.png" alt="Illustration of a jammy egg">
+            <div class="egg-card" onclick="startTimer(420, 'Jammy Dance', 'assets/images/jammy.webp')" role="button" tabindex="0">
+                <img src="assets/images/jammy.webp" alt="Illustration of a jammy egg">
                 <h2>Jammy (7 min)</h2>
                 <p>Sticky, gooey joy.</p>
             </div>
             
-            <div class="egg-card" onclick="startTimer(600, 'Properly Hard', 'assets/images/hard.png')" role="button" tabindex="0">
-                <img src="assets/images/hard.png" alt="Illustration of a hard boiled egg">
+            <div class="egg-card" onclick="startTimer(600, 'Properly Hard', 'assets/images/hard.webp')" role="button" tabindex="0">
+                <img src="assets/images/hard.webp" alt="Illustration of a hard boiled egg">
                 <h2>Hard (10 min)</h2>
                 <p>Fully set & ready.</p>
             </div>
@@ -58,35 +58,35 @@
             <h2 id="box-title">MY EGG BOX</h2>
             <div class="sticker-grid">
                 <div class="sticker-item" id="s-soft" title="Boil a soft egg">
-                    <img src="assets/images/sticker/soft_sticker.png" alt="Soft egg sticker">
+                    <img src="assets/images/sticker/soft_sticker.webp" alt="Soft egg sticker">
                     <p>Softie</p>
                 </div>
                 <div class="sticker-item" id="s-jammy" title="Boil a jammy egg">
-                    <img src="assets/images/sticker/jammy_sticker.png" alt="Jammy egg sticker">
+                    <img src="assets/images/sticker/jammy_sticker.webp" alt="Jammy egg sticker">
                     <p>Jammy</p>
                 </div>
                 <div class="sticker-item" id="s-hard" title="Boil a hard egg">
-                    <img src="assets/images/sticker/hard_sticker.png" alt="Hard egg sticker">
+                    <img src="assets/images/sticker/hard_sticker.webp" alt="Hard egg sticker">
                     <p>Hardcore</p>
                 </div>
                 <div class="sticker-item" id="s-abs" title="Boil for 12-15 mins">
-                    <img src="assets/images/sticker/abs_egg.png" alt="Abs egg sticker">
+                    <img src="assets/images/sticker/abs_egg.webp" alt="Abs egg sticker">
                     <p>Gym Bro</p>
                 </div>
                 <div class="sticker-item" id="s-pot" title="Use custom timer">
-                    <img src="assets/images/sticker/boiling_pot.png" alt="Boiling pot sticker">
+                    <img src="assets/images/sticker/boiling_pot.webp" alt="Boiling pot sticker">
                     <p>Chef</p>
                 </div>
                 <div class="sticker-item" id="s-chili" title="Find Kevin's secret">
-                    <img src="assets/images/sticker/chili_egg.png" alt="Chili egg sticker">
+                    <img src="assets/images/sticker/chili_egg.webp" alt="Chili egg sticker">
                     <p>Malone</p>
                 </div>
                 <div class="sticker-item" id="s-cat" title="Solve cat math">
-                    <img src="assets/images/sticker/cat_sticker.png" alt="Cat sticker">
+                    <img src="assets/images/sticker/cat_sticker.webp" alt="Cat sticker">
                     <p>Not A Cat</p>
                 </div>
                 <div class="sticker-item" id="s-batch" title="Collect all stickers">
-                    <img src="assets/images/sticker/batch_eggs.png" alt="Batch eggs sticker">
+                    <img src="assets/images/sticker/batch_eggs.webp" alt="Batch eggs sticker">
                     <p>MASTER</p>
                 </div>
             </div>
@@ -103,7 +103,7 @@
             <div id="modal-input-area">
                 <p id="modal-prompt">How many minutes for your egg?</p>
                 <div class="custom-input-container">
-                    <img id="custom-egg-img" src="assets/images/who_am_i.png" alt="Custom egg preview">
+                    <img id="custom-egg-img" src="assets/images/who_am_i.webp" alt="Custom egg preview">
                     <input type="number" id="custom-minutes" placeholder="?" min="1" oninput="updateCustomImage(this.value)" aria-label="Minutes to boil">
                 </div>
                 <div id="modal-buttons">
@@ -116,7 +116,7 @@
             <div id="modal-timer-area" class="hidden">
                 <h2 id="timer-title">Boiling...</h2>
                 <p id="egg-name-tag"></p>
-                <img id="timer-egg-img" src="assets/images/soft.png" alt="Cooking egg" class="timer-art" tabindex="0" aria-label="Click for Kevin wisdom">
+                <img id="timer-egg-img" src="assets/images/soft.webp" alt="Cooking egg" class="timer-art" tabindex="0" aria-label="Click for Kevin wisdom">
                 <div id="wisdom-box" class="wisdom-box hidden" aria-live="assertive">
                     <p id="kevin-wisdom-text"></p>
                 </div>
@@ -143,7 +143,7 @@
 
     <section id="sticker-alert" class="sticker-alert hidden">
         <div class="alert-content">
-            <img src="assets/images/trophy.png" alt="Trophy" class="alert-trophy">
+            <img src="assets/images/trophy.webp" alt="Trophy" class="alert-trophy">
             <div class="alert-text">
                 <h3>NEW STICKER!</h3>
                 <p id="unlocked-name"></p>
@@ -155,7 +155,7 @@
     <section id="kevin-69-modal" class="modal hidden" role="dialog" aria-modal="true">
         <div class="modal-content kevin-69-content">
             <button class="kevin-69-close" onclick="closeKevin69()" aria-label="Close secret">×</button>
-            <img src="assets/images/69.gif" alt="Kevin Nice" class="kevin-69-gif">
+            <img src="assets/images/69.webp" alt="Kevin Nice" class="kevin-69-webp">
         </div>
     </section>
 

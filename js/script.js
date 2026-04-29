@@ -172,7 +172,7 @@ function startTimer(seconds, label, imgPath) {
     
     if (timerTitle) timerTitle.innerText = label + "...";
     if (timerEggImg) {
-        timerEggImg.src = imgPath || 'assets/images/soft.png';
+        timerEggImg.src = imgPath || 'assets/images/soft.webp';
         timerEggImg.onclick = getWisdom;
     }
     
@@ -237,7 +237,7 @@ function openCustomModal() {
     subcontent.classList.add('hidden');
     
     minsInput.value = '';
-    customImg.src = 'assets/images/who_am_i.png';
+    customImg.src = 'assets/images/who_am_i.webp';
 }
 
 function updateCustomImage(val) {
@@ -246,16 +246,16 @@ function updateCustomImage(val) {
     if (!customImg) return;
     
     if (isNaN(mins) || mins <= 0) {
-        customImg.src = 'assets/images/who_am_i.png';
+        customImg.src = 'assets/images/who_am_i.webp';
         return;
     }
 
-    if (mins === 6) customImg.src = 'assets/images/i_am_soft_boiled.png';
-    else if (mins === 7) customImg.src = 'assets/images/i_am_jammy_yammy.png';
-    else if (mins === 10) customImg.src = 'assets/images/i_am_hard_boiled.png';
-    else if (mins >= 12 && mins <= 15) customImg.src = 'assets/images/six_pack_egg.png';
-    else if (mins > 15) customImg.src = 'assets/images/sure_egg.png';
-    else customImg.src = 'assets/images/who_am_i.png';
+    if (mins === 6) customImg.src = 'assets/images/i_am_soft_boiled.webp';
+    else if (mins === 7) customImg.src = 'assets/images/i_am_jammy_yammy.webp';
+    else if (mins === 10) customImg.src = 'assets/images/i_am_hard_boiled.webp';
+    else if (mins >= 12 && mins <= 15) customImg.src = 'assets/images/six_pack_egg.webp';
+    else if (mins > 15) customImg.src = 'assets/images/sure_egg.webp';
+    else customImg.src = 'assets/images/who_am_i.webp';
 }
 
 function showKevin69() {
@@ -265,7 +265,7 @@ function showKevin69() {
 function closeKevin69() {
     document.getElementById('kevin-69-modal').classList.add('hidden');
     // Start 69 minute timer
-    startTimer(69 * 60, "Kevin's Special Egg", 'assets/images/69.png');
+    startTimer(69 * 60, "Kevin's Special Egg", 'assets/images/69.webp');
     
     const minsInput = document.getElementById('custom-minutes');
     if (minsInput) {
@@ -348,7 +348,7 @@ function handleWarning(choice) {
         text.innerText = "No cat allowed!";
         buttons.innerHTML = '';
         subcontent.innerHTML = `
-            <img src="assets/images/meow.png" alt="Cat?">
+            <img src="assets/images/meow.webp" alt="Cat?">
             <p>What is 2 + 2? <input type="number" id="cat-math" oninput="checkCatMath(this.value)"></p>
         `;
         subcontent.classList.remove('hidden');
@@ -369,7 +369,7 @@ function checkCatMath(val) {
 function closeModal(start) {
     if (start) {
         const mins = parseInt(document.getElementById('custom-minutes').value) || 61;
-        startTimer(mins * 60, "Very Long Egg", 'assets/images/sure_egg.png');
+        startTimer(mins * 60, "Very Long Egg", 'assets/images/sure_egg.webp');
     } else {
         document.getElementById('custom-modal').classList.add('hidden');
     }
@@ -439,14 +439,14 @@ function showStickerAlert(id) {
     };
 
     const imgs = {
-        'soft': 'assets/images/sticker/soft_sticker.png',
-        'jammy': 'assets/images/sticker/jammy_sticker.png',
-        'hard': 'assets/images/sticker/hard_sticker.png',
-        'abs': 'assets/images/sticker/abs_egg.png',
-        'pot': 'assets/images/sticker/boiling_pot.png',
-        'chili': 'assets/images/sticker/chili_egg.png',
-        'cat': 'assets/images/sticker/cat_sticker.png',
-        'batch': 'assets/images/sticker/batch_eggs.png'
+        'soft': 'assets/images/sticker/soft_sticker.webp',
+        'jammy': 'assets/images/sticker/jammy_sticker.webp',
+        'hard': 'assets/images/sticker/hard_sticker.webp',
+        'abs': 'assets/images/sticker/abs_egg.webp',
+        'pot': 'assets/images/sticker/boiling_pot.webp',
+        'chili': 'assets/images/sticker/chili_egg.webp',
+        'cat': 'assets/images/sticker/cat_sticker.webp',
+        'batch': 'assets/images/sticker/batch_eggs.webp'
     };
 
     nameElem.innerText = names[id] || 'New Friend!';

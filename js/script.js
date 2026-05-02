@@ -259,6 +259,7 @@ function updateCustomImage(val) {
 }
 
 function showKevin69() {
+    unlockSticker('bad_boy');
     document.getElementById('kevin-69-modal').classList.remove('hidden');
 }
 
@@ -435,6 +436,7 @@ function showStickerAlert(id) {
         'pot': 'Chef',
         'chili': 'Malone',
         'cat': 'Not A Cat',
+        'bad_boy': 'Bad Boy',
         'batch': 'MASTER'
     };
 
@@ -446,6 +448,7 @@ function showStickerAlert(id) {
         'pot': 'assets/images/sticker/boiling_pot.webp',
         'chili': 'assets/images/sticker/chili_egg.webp',
         'cat': 'assets/images/sticker/cat_sticker.webp',
+        'bad_boy': 'assets/images/sticker/bad_boy.webp',
         'batch': 'assets/images/sticker/batch_eggs.webp'
     };
 
@@ -459,7 +462,7 @@ function showStickerAlert(id) {
 }
 
 function checkMaster() {
-    const mainIds = ['soft', 'jammy', 'hard', 'abs', 'pot', 'chili', 'cat'];
+    const mainIds = ['soft', 'jammy', 'hard', 'abs', 'pot', 'chili', 'cat', 'bad_boy'];
     const all = mainIds.every(id => unlockedStickers.includes(id));
     if (all) unlockSticker('batch');
 }

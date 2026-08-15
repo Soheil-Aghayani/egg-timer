@@ -197,7 +197,7 @@ h1 {
 .btn-cancel { background-color: rgba(255, 0, 0, 0.1); }
 .btn-pause, .btn-custom-trigger { background-color: var(--egg-yellow); }
 .btn-custom-trigger { width: 100%; font-size: 1.8rem; margin-top: 15px; box-shadow: 6px 6px 0px rgba(0,0,0,0.1); }
-.btn-box-trigger { width: 100%; background: #4caf50; color: white; margin-top: 10px; font-size: 1.5rem; }
+.btn-box-trigger { width: 100%; background: #2f7d32; color: white; margin-top: 10px; font-size: 1.5rem; }
 .modal-btn:hover { background: var(--egg-yellow); transform: translateY(-2px); }
 
 .btn-reset {

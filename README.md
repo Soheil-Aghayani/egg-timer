@@ -1,4 +1,6 @@
 <div align="center">
+  <img src="assets/readme-hero.svg" alt="Whimsical Egg Timer visual hero" width="100%">
+
   <h1>🥚 WHIMSICAL EGG TIMER</h1>
   <p><strong>Pick your perfect egg. Start a tiny timer. Collect a little joy.</strong></p>
   <p>
